@@ -69,7 +69,7 @@ impl LanguageType {
         if self == Jupyter {
             return self
                 .parse_jupyter(text.as_ref(), config)
-                .unwrap_or_else(CodeStats::new);
+                .unwrap_or_default();
         }
 
         let syntax = {
@@ -300,7 +300,7 @@ impl LanguageType {
                     Some(C)
                 } else {
                     let name_str = &String::from_utf8_lossy(name);
-                    let by_name = LanguageType::from_name(&name_str);
+                    let by_name = LanguageType::from_name(name_str);
                     if by_name.is_none() {
                         trace!("LF target not recognized: {}", name_str);
                     }

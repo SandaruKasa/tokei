@@ -1,4 +1,3 @@
-use std::mem;
 use std::process;
 
 use clap::Arg;
@@ -424,7 +423,7 @@ impl Cli {
             _ => None,
         };
 
-        config.types = mem::replace(&mut self.types, None).or(config.types);
+        config.types = self.types.take().or(config.types);
 
         config
     }
